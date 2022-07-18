@@ -40,7 +40,7 @@
                             </td>
                             <td class="p-1">
                                 <img class="table-product-img"
-                                    src= "<?php echo e(asset($product->image)); ?>"
+                                    src="<?php echo e($product->image ? asset($product->image) : asset('assets/images/thumbnail.png')); ?>"
                                     alt="<?php echo e($product->name); ?>">
                             </td>
                             <td>£<?php echo e($product->getPrice()); ?></td>

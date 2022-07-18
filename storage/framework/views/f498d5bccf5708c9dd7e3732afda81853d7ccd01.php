@@ -138,7 +138,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <img class="thumbnail-img"
-                            src="<?php echo e(asset($product->image)); ?>"
+                            src="<?php echo e($product->image ? asset($product->image) : asset('assets/images/thumbnail.png')); ?>"
                             alt="Product">
                         <p class="mt-2 mb-0 text-center"><?php echo e(Str::title($product->name)); ?></p>
                         <p class="text-center mb-0">

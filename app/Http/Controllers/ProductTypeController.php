@@ -27,10 +27,10 @@ class ProductTypeController extends Controller
     public function store(ProductTypeRequest $request){
         $productType = new ProductType();
         $productType->name = $request->product_type;
-        $productType->status = 1;
+        $productType->status = 0;
         $productType->shop_id = $request->shop;
         if($request->hasFile('image')){
-            $image = $request->image->move('uploads', 'public');
+            $image = $request->image->store('uploads', 'public');
             $productType->image = $image;
         }
         $productType->save();
@@ -52,7 +52,7 @@ class ProductTypeController extends Controller
         $productType->shop_id = $request->shop;
         if($request->hasFile('image')){
             Storage::delete('public/' . $productType->image);
-            $image = $request->image->storeAs('uploads', 'public');
+            $image = $request->image->store('uploads', 'public');
             $productType->image = $image;
         }
         $productType->update();

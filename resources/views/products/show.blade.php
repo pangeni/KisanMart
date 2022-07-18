@@ -25,8 +25,7 @@
     <div class="row">
         <div class="col-lg-4 image">
             <img class="product-img mt-5"
-                
-                src="{{ asset($product->image)}}"
+                src="{{ $product->image ? asset($product->image) : asset('assets/images/thumbnail.png') }}"
                 alt="{{ $product->name }}">
         </div>
         <div class="loupe"></div>
@@ -88,9 +87,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <p class="text-muted mb-2 bold">Fundamental Unit</p>
+                        <p class="text-muted mb-2 bold">Allergy Info</p>
                         <p class="text-muted mb-0">
-                            {!! $product->allergy_info ? e($product->allergy_info) : '<i>No unit</i>' !!}
+                            {!! $product->allergy_info ? e($product->allergy_info) : '<i>No Allergy</i>' !!}
                         </p>
                     </td>
                 </tr>

@@ -32,7 +32,7 @@ class ShopController extends Controller
         $shop->status = 1;
         $shop->user_id = auth()->user()->id;
         if($request->hasFile('image')){
-            $image = $request->image->move('uploads', 'public');
+            $image = $request->image->store('uploads', 'public');
             $shop->image = $image;
         }
         $shop->save();
@@ -51,7 +51,7 @@ class ShopController extends Controller
         $shop->name = $request->shop_name;
         if($request->hasFile('image')){
             Storage::delete('public/' . $shop->image);
-            $image = $request->image->storeAs('uploads', 'public');
+            $image = $request->image->store('uploads', 'public');
             $shop->image = $image;
         }
         $shop->save();

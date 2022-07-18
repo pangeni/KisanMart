@@ -41,7 +41,7 @@
                             </td>
                             <td class="p-1">
                                 <img class="table-product-img"
-                                    src= "{{ asset($product->image)}}"
+                                    src="{{ $product->image ? asset($product->image) : asset('assets/images/thumbnail.png') }}"
                                     alt="{{ $product->name }}">
                             </td>
                             <td>£{{ $product->getPrice() }}</td>

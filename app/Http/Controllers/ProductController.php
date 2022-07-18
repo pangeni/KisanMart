@@ -26,7 +26,6 @@ class ProductController extends Controller
     }
 
     public function store(ProductRequest $request){
-        //$request->image->store('uploads', 'public');
         $product = Product::create([
             'name' => $request->name,
             'product_type_id' => $request->product_type_id,
@@ -36,8 +35,8 @@ class ProductController extends Controller
             'minimum' => $request->minimum,
             'maximum' => $request->maximum,
             'allergy_info' => $request->allergy_info,
-            'image' => $request->image->move('uploads', 'public'),
-            'status' => 1
+            'image' => $request->image->store('uploads', 'public'),
+            'status' => 0
         ]);
         $product->discount()->attach($request->discount_id);
         return redirect()->route('products.index')->with('message', alert('Product Created Successfully', 'primary'));
@@ -69,16 +68,11 @@ class ProductController extends Controller
         $product->maximum = $request->maximum;
         $product->allergy_info = $request->allergy_info;
         $product->status = 1;
-    
         if($request->hasFile('image')){
-
             Storage::delete('public/' . $product->image);
-             
-          $product->image = $request->image->storeAs('uploads', 'public');
+            $product->image = $request->image->store('uploads', 'public');
         }
-        
         $product->update();
-        
         $product->discount()->sync($request->discount_id);
         return redirect()->route('products.index')->with('message', alert('Product Updated Successfully', 'primary'));
     }
